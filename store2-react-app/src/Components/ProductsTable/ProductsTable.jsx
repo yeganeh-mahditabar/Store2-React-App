@@ -3,7 +3,6 @@ import "./ProductsTable.css";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import DetailsModals from "../DetailsModals/DetailsModals";
 import EditModal from "../EditModal/EditModal";
-import { AiOutlineDollarCircle } from "react-icons/ai";
 import Errorbox from "../Errorbox/Errorbox";
 
 export default function ProductsTable() {
@@ -118,102 +117,14 @@ export default function ProductsTable() {
         />
       )}
       {isShowDetailsModal && (
-        <DetailsModals onHide={closeDetailsModal}>
-          <table className="cms-table">
-            <thead>
-              <tr>
-                <th>محبوبیت</th>
-                <th>فروش</th>
-                <th>رنگ بندی</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>{mainProductInfos.popularity}</td>
-                <td>{mainProductInfos.sale}</td>
-                <td>{mainProductInfos.colors}</td>
-              </tr>
-            </tbody>
-          </table>
-        </DetailsModals>
+        <DetailsModals onHide={closeDetailsModal} mainProductInfos={mainProductInfos} />
+          
       )}
       {isShowEditModal && (
         <EditModal
           onClose={() => setIsShowEditModal(false)}
           onSubmit={updateProductInfos}
-        >
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="عنوان جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="قیمت جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="موجودی جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="آدرس جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="محبوبیت جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="میزان فروش جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-          <div className="edit-proructs-form-group">
-            <span>
-              <AiOutlineDollarCircle />
-            </span>
-            <input
-              type="text"
-              placeholder="تعداد رنگ بندی جدید را وارد کنید"
-              className="edit-product-input"
-            />
-          </div>
-        </EditModal>
+        />
       )}
     </>
   );
