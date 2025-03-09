@@ -4,6 +4,7 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import DetailsModals from "../DetailsModals/DetailsModals";
 import EditModal from "../EditModal/EditModal";
 import Errorbox from "../Errorbox/Errorbox";
+import { API_URL } from "../../configs";
 
 export default function ProductsTable() {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
@@ -18,7 +19,7 @@ export default function ProductsTable() {
   }, []);
 
   const getAllProducts = () => {
-    fetch("http://localhost:8000/api/products/")
+    fetch(`${API_URL}/products/`)
       .then((res) => res.json())
       .then((products) => setAllProducts(products));
   };
@@ -30,7 +31,7 @@ export default function ProductsTable() {
 
   const deleteModalSubmitAction = () => {
     console.log("مدال تایید شد");
-    fetch(`http://localhost:8000/api/products/${productID}`, {
+    fetch(`${API_URL}/products/${productID}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
