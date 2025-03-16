@@ -17,7 +17,7 @@ export default function DetailsModals({ onHide, mainProductInfos }) {
 
             <tbody>
               <tr>
-                <td>{mainProductInfos.popularity}</td>
+                <td>{mainProductInfos.popularity}%</td>
                 <td>{mainProductInfos.sale}</td>
                 <td>{mainProductInfos.colors}</td>
               </tr>
