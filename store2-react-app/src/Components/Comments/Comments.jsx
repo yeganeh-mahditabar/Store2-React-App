@@ -26,21 +26,23 @@ export default function Comments() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>مریم</td>
-              <td>آیفون 13</td>
-              <td>
-                <button>دیدن متن</button>
-              </td>
-              <td>1403-11-11</td>
-              <td>14:12</td>
-              <td>
-                <button>حذف</button>
-                <button>ویرایش</button>
-                <button>پاسخ</button>
-                <button>تایید</button>
-              </td>
-            </tr>
+            {allComments.map((comment) => (
+              <tr key={comment.id}>
+                <td>{comment.userID}</td>
+                <td>{comment.productID}</td>
+                <td>
+                  <button>دیدن متن</button>
+                </td>
+                <td>{comment.date}</td>
+                <td>{comment.hour}</td>
+                <td>
+                  <button>حذف</button>
+                  <button>ویرایش</button>
+                  <button>پاسخ</button>
+                  <button>تایید</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       ) : (
