@@ -35,7 +35,7 @@ export default function ProductsTable() {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((result) => {
+      .then(() => {
         setIsShowDeleteModal(false);
         getAllProducts();
       });

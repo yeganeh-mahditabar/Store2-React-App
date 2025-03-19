@@ -3,19 +3,38 @@ import Errorbox from "../Errorbox/Errorbox";
 import { API_URL } from "../../configs";
 import "./Comments.css";
 import Modal from "../Modal/Modal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 export default function Comments() {
   const [allComments, setAllComments] = useState([]);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
+  const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [mainCommentBody, setMainCommentBody] = useState("");
+  const [commentID, setCommentID] = useState(null);
 
   useEffect(() => {
+    getAllComments();
+  }, []);
+
+  function getAllComments() {
     fetch(`${API_URL}/comments`)
       .then((res) => res.json())
       .then((comments) => setAllComments(comments));
-  }, []);
+  }
 
   const closeDetailsModal = () => setIsShowDetailsModal(false);
+  const closeDeleteModal = () => setIsShowDeleteModal(false);
+
+  const deleteComment = () => {
+    fetch(`${API_URL}/comments/${commentID}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setIsShowDeleteModal(false);
+      });
+  };
 
   return (
     <div className="cms-main">
@@ -49,7 +68,14 @@ export default function Comments() {
                 <td>{comment.date}</td>
                 <td>{comment.hour}</td>
                 <td>
-                  <button>حذف</button>
+                  <button
+                    onClick={() => {
+                      setIsShowDeleteModal(true);
+                      setCommentID(comment.id);
+                    }}
+                  >
+                    حذف
+                  </button>
                   <button>ویرایش</button>
                   <button>پاسخ</button>
                   <button>تایید</button>
@@ -69,6 +95,13 @@ export default function Comments() {
             بستن
           </button>
         </Modal>
+      )}
+
+      {isShowDeleteModal && (
+        <DeleteModal
+          cancelAction={closeDeleteModal}
+          submitAction={deleteComment}
+        />
       )}
     </div>
   );
